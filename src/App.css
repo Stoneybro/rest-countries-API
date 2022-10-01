@@ -92,7 +92,8 @@ body{
 }
 .country-image img{
   width: 100%;
-
+  height: 293px;
+  object-fit: cover;
 }
 .countries-info{
   padding:1rem 1.5rem 4rem ;
@@ -136,6 +137,7 @@ body{
 }
 .single-country-flag img{
   width: 90%;
+  
 }
 .single-country-info-text{
   flex: 1;
@@ -161,6 +163,10 @@ body{
   display: flex;
   gap: 1rem;
   align-items: center;
+}
+.sc-border-country div{
+  display: flex;
+  gap: 0.5rem;
 }
 
 .single-country-name{

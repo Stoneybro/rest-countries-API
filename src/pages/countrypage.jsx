@@ -4,6 +4,7 @@
     import { Link,Outlet } from "react-router-dom"
     export default function Country(params) {
         const newdata=useFetch()
+        console.log(newdata);
         return(
             <>
             <Navbar />
@@ -32,7 +33,7 @@
                         return(
                             <Link to={`/${data.name}`} className='country-links' key={data.name}>
                             <div className="countries-container" >
-                            <div className="country-image"><img src='https://flagcdn.com/er.svg' alt="erasmus" /></div>
+                            <div className="country-image"><img src={data.flag} alt="erasmus" /></div>
                             <div className="countries-info">
                             <div className="country-name">{data.name}</div>
                             <div className="country-population"><span>Population: </span>{data.population}</div>
