@@ -1,9 +1,9 @@
 :root{
   --darkmode-element:hsl(209, 23%, 22%);
   --darkmode-background: hsl(207, 26%, 17%);
-  --lightmode-text: hsl(200, 15%, 8%);
-  --lightmode-input:hsl(0, 0%, 52%);
-  --lightmode-background: hsl(0, 0%, 98%);
+  --text: hsl(200, 15%, 8%);
+  --input:hsl(0, 0%, 52%);
+  --background: hsl(0, 0%, 98%);
 }
 @font-face {
   font-family:'Nunito Sans' ;
@@ -18,10 +18,10 @@
 html {
   font-family: 'Nunito', sans-serif;
   font-size: 22px;
-  color: var(--lightmode-text);
+  color: var(--text);
 }
 body{
-  background-color: var(--lightmode-background);
+  background-color: var(--background);
   display: flex;
   flex-direction: column;
 }
@@ -36,7 +36,7 @@ body{
   display: flex;
   gap: 0.5rem;
   font-size: 1.1rem;
-  color: var(--lightmode-text);
+  color: var(--text);
   font-weight: 400;
 }
 .country{
@@ -57,14 +57,29 @@ body{
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.128),-2px -2px 1px rgba(0, 0, 0, 0.037);
   padding: 0px 0px 0px 100px;
   font-size: 1rem;
-  outline-color: var(--lightmode-input);
+  outline-color: var(--input);
 }
 .searchicon{
   position: absolute;
   top: 22px;
   left: 40px;
 }
+
+.filter-region{
+  position: relative;
+  width: 12rem;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.filter-region label{
+  z-index: 0;
+  
+}
 .filter-region select{
+  z-index: -1;
+  position: absolute;
   font-size: 1rem;
   text-align: center;
   width: 12rem;
@@ -73,6 +88,9 @@ body{
   border-radius: 8px;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.128),-2px -2px 1px rgba(0, 0, 0, 0.037);
   outline: none;
+  top: 0;
+  left: 0;
+
 }
 .countries{
   padding: 2rem 5rem;
@@ -100,7 +118,7 @@ body{
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  color: var(--lightmode-text);
+  color: var(--text);
 }
 .country-name{
   font-weight: 700;
@@ -172,6 +190,15 @@ body{
 .single-country-name{
   font-size: 1;
 }
+.tailspin{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 3rem;
+}
+
+/*  */
 @media (max-width:480px)  { 
   .country,.navbar,.countries,.single-country{
     padding: 2rem 1rem ;
@@ -216,6 +243,143 @@ body{
   .search input{
     width: unset;
   }
+}
+
+
+
+
+
+details {
+  position: relative;
+  width: 100%;
+  
+}
+
+details[open] {
+  z-index: 1;
+}
+
+summary {
+  padding: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: var(--background);
+  list-style: none;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.128),-2px -2px 1px rgba(0, 0, 0, 0.037);
+
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+details[open] summary:before {
+  content: '';
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+summary:after {
+  content: '';
+  display: inline-block;
+  float: right;
+  width: .5rem;
+  height: .5rem;
+  border-bottom: 1px solid currentColor;
+  border-left: 1px solid currentColor;
+  border-bottom-left-radius: 2px;
+  transform: rotate(45deg) translate(50%, 0%);
+  transform-origin: center center;
+  transition: transform ease-in-out 100ms
+}
+
+summary:focus {
+  outline: none;
+}
+
+details[open] summary:after {
+  transform: rotate(-45deg) translate(0%, 0%);
+}
+
+ul {
+  width: 100%;
+  background: var(--background);
+  position: absolute;
+  top: calc(100% + .5rem);
+  left: 0;
+  padding: 1rem;
+  margin: 0;
+  box-sizing: border-box;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.128),-2px -2px 1px rgba(0, 0, 0, 0.037);
+  list-style-type: none;
+}
+
+li {
+  margin: 0;
+  padding: 1rem 0;
+
+}
+
+li:first-child {
+  padding-top: 0;
+}
+
+li:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+/* FAKE SELECT */
+
+summary.radios {
+  counter-reset: radios;
+}
+
+summary.radios:before {
+  content: var(--selection);
+}
+
+input[type=radio] {
+  counter-increment: radios;
+  appearance: none;
+  display: none;
+}
+
+input[type=radio]:checked {
+  display: inline;
+  --display: block;
+}
+
+input[type=radio]:after {
+  content: attr(title);
+  display: inline;
+  font-size: 1rem;
+}
+
+ul.list {
+  counter-reset: labels;
+}
+
+label {
+  width: 100%;
+  display: flex;
+  cursor: pointer;
+  justify-content: space-between;
+}
+
+label span {
+  --display: none;
+  display: var(--display);
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid #727272;
+  border-radius: 3px;
 }
 
 

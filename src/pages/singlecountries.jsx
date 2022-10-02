@@ -2,7 +2,7 @@ import {useParams} from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import { useFetch } from '../context/Fetchprovider'
 export default function Singlecountries(params) {
-    const data =useFetch()
+    const { data }=useFetch()
     
     const {Country} =useParams()
 
@@ -10,6 +10,7 @@ export default function Singlecountries(params) {
         
        return data.name===Country
     })
+    
     const lang=singledata.languages && singledata.languages.map((lang)=>{
         return lang.name
     })
@@ -24,7 +25,7 @@ export default function Singlecountries(params) {
         <Navbar />
 
        <div className="single-country">
-        <button className="back">Back</button>
+        <button className="back" onClick={()=>history.back()}>Back</button>
 
         <div className="single-country-info">
             <div className="single-country-flag">
