@@ -5,8 +5,18 @@ const fetchContext=createContext()
 export const FetchProvider=({children})=>{
     const [category,setCategory]=useState('all')
     const [spec,setSpec]=useState('')
-
-
+    const [theme,setTheme]=useState('light')
+    function toggleTheme() {
+        if (theme==='light') {
+            setTheme('dark')
+        }else{
+            setTheme('light')
+        }
+    }
+    useEffect(() => {
+        document.documentElement.className = theme;
+        localStorage.setItem('theme', theme);
+      }, [theme]);
 
     useEffect(()=>{
                 setCategory('name')
@@ -33,7 +43,7 @@ export const FetchProvider=({children})=>{
 
 return(
     <fetchContext.Provider value={
-        {data,spec,setSpec,setCategory,category,
+        {data,spec,setSpec,setCategory,category,toggleTheme
 }    }>
         {children}
     </fetchContext.Provider>
