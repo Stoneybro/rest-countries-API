@@ -7,7 +7,7 @@
   --shadow-thick: 2px 2px 8px rgba(0, 0, 0, 0.235),-2px -2px 4px rgba(0, 0, 0, 0.139);
   --element:hsl(0, 0%, 98%);
 }
-.dark-theme{
+.dark{
   --text: hsl(0, 0%, 98%);
   --input:hsl(0, 0%, 52%);
   --background:  hsl(207, 26%, 17%);
@@ -16,7 +16,7 @@
   --shadow-thick: 2px 2px 8px rgba(255, 255, 255, 0.235),-2px -2px 4px rgba(255, 255, 255, 0.139);
   --element:hsl(209, 23%, 22%);
 }
-.light-theme{
+.light{
   --text: hsl(200, 15%, 8%);
   --input:hsl(0, 0%, 52%);
   --background: hsl(0, 0%, 98%);
@@ -44,6 +44,7 @@ body{
   background-color: var(--background);
   display: flex;
   flex-direction: column;
+  transition: all 0.3s linear;
 }
 .navbar{
   width: 100%;
@@ -59,7 +60,9 @@ body{
   font-size: 1.1rem;
   color: var(--text);
   font-weight: 400;
+  cursor: pointer;
 }
+
 .country{
   padding: 2rem 5rem;
 }
@@ -71,6 +74,7 @@ body{
   position: relative;
 }
 .search input{
+
   width: 25vw;
   height: 3.5rem;
   border: none;
@@ -161,7 +165,9 @@ body{
   box-shadow: var(--shadow-thick);
   padding: 0.5rem 1rem;
   font-size: 1rem;
- 
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
 }
 
 /* single country page */
@@ -221,7 +227,8 @@ body{
 }
 
 /*  */
-@media (max-width:480px)  { 
+
+@media (max-width:600px)  { 
   .country,.navbar,.countries,.single-country{
     padding: 2rem 1rem ;
   }
@@ -251,7 +258,8 @@ body{
     flex-direction: column;
   }
   .countries-container{
-    width: 15rem;
+   
+    max-width: 14rem;
   }
   .countries{
     flex-direction: column;
@@ -263,9 +271,22 @@ body{
 
   }
   .search input{
-    width: unset;
+   min-width: 14rem;
   }
 }
+@media (max-width:850px)  {
+  .country-inputs{
+    flex-direction: column;
+    gap: 2rem;
+
+  }
+  .country,.navbar,.countries,.single-country{
+    padding: 3rem 1.5rem ;
+  }
+  .search input{
+    min-width: 14rem;
+   }
+ }
 
 
 
@@ -288,6 +309,7 @@ summary {
   background-color: var(--background);
   list-style: none;
   box-shadow: var(--shadow-thin);
+  color: var(--text);
 
 }
 
@@ -371,11 +393,13 @@ input[type=radio] {
   counter-increment: radios;
   appearance: none;
   display: none;
+  color: var(--text);
 }
 
 input[type=radio]:checked {
   display: inline;
   --display: block;
+  color: var(--text);
 }
 
 input[type=radio]:after {

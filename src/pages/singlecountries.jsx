@@ -1,6 +1,7 @@
 import {useParams} from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import { useFetch } from '../context/Fetchprovider'
+import {AiOutlineArrowLeft} from 'react-icons/ai'
 export default function Singlecountries(params) {
     const { data }=useFetch()
     
@@ -10,7 +11,7 @@ export default function Singlecountries(params) {
         
        return data.name===Country
     })
-    
+
     const lang=singledata.languages && singledata.languages.map((lang)=>{
         return lang.name
     })
@@ -25,7 +26,7 @@ export default function Singlecountries(params) {
         <Navbar />
 
        <div className="single-country">
-        <button className="back" onClick={()=>history.back()}>Back</button>
+        <button className="back" onClick={()=>history.back()}><AiOutlineArrowLeft/>Back</button>
 
         <div className="single-country-info">
             <div className="single-country-flag">

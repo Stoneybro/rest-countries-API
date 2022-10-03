@@ -1,11 +1,17 @@
 import { createContext,useState,useEffect, useContext } from "react";
 
 const fetchContext=createContext()
-
+const getStorageTheme = () => {
+    let theme = 'light';
+    if (localStorage.getItem('theme')) {
+      theme = localStorage.getItem('theme');
+    }
+    return theme;
+  };
 export const FetchProvider=({children})=>{
     const [category,setCategory]=useState('all')
     const [spec,setSpec]=useState('')
-    const [theme,setTheme]=useState('light')
+    const [theme,setTheme]=useState(getStorageTheme())
     function toggleTheme() {
         if (theme==='light') {
             setTheme('dark')
@@ -43,7 +49,7 @@ export const FetchProvider=({children})=>{
 
 return(
     <fetchContext.Provider value={
-        {data,spec,setSpec,setCategory,category,toggleTheme
+        {data,spec,setSpec,setCategory,category,toggleTheme,theme
 }    }>
         {children}
     </fetchContext.Provider>
